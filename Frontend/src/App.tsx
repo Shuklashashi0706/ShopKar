@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Loader from "./components/Loader";
+import Header from "./components/Header";
 const Home = lazy(() => import("./pages/Home"));
 const Search = lazy(() => import("./pages/Search"));
 const Cart = lazy(() => import("./pages/Cart"));
@@ -27,9 +28,8 @@ function App() {
     <>
       <Router>
         {/* Header */}
-        <Suspense fallback={<Loader />}>
-          {" "}
-          {/*to show till components are getting loaded*/}
+        <Header/>
+        <Suspense fallback={<Loader />}>{/*to show till components are getting loaded*/}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
