@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 const Shipping = () => {
@@ -10,8 +10,12 @@ const Shipping = () => {
         country:"",
         pinCode:""
         });
-    const changeHandler = ()=>{}
-    const submitHandler =()=>{}
+    const changeHandler = (e:ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
+      setShippingInfo((prev)=>({...prev,[e.target.name]:e.target.value}))
+    }
+    const submitHandler = (e:ChangeEvent)=>{
+      e.preventDefault();
+    }
   return (
     <div className="shipping">
     <button className="back-btn" onClick={()=>navigate("/cart")}>
@@ -56,6 +60,8 @@ const Shipping = () => {
       >
         <option value="">Choose Country</option>
         <option value="india">India</option>
+        <option value="usa">USA</option>
+        <option value="nepal">Nepal</option>
       </select>
 
       <input

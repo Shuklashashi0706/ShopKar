@@ -2,10 +2,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Loader from "./components/Loader";
 import Header from "./components/Header";
+const OrderDetails = lazy(() => import("./pages/order-details"));
+const Orders = lazy(() => import("./pages/orders"));
 const Home = lazy(() => import("./pages/Home"));
 const Search = lazy(() => import("./pages/Search"));
 const Cart = lazy(() => import("./pages/Cart"));
-const Shipping = lazy(()=>import("./pages/shipping"))
+const Shipping = lazy(() => import("./pages/shipping"));
+const Login = lazy(() => import("./pages/Login"));
+const NotFound = lazy(() => import("./pages/not-found"));
 //Admin
 const Dashboard = lazy(() => import("./pages/admin/dashboard"));
 const Products = lazy(() => import("./pages/admin/products"));
@@ -29,27 +33,33 @@ function App() {
     <>
       <Router>
         {/* Header */}
-        <Header/>
-        <Suspense fallback={<Loader />}>{/*to show till components are getting loaded*/}
+        <Header />
+        <Suspense fallback={<Loader />}>
+          {/*to show till components are getting loaded*/}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
             <Route path="/cart" element={<Cart />} />
 
+            {/* Not Logged in routes */}
+            <Route path="/login" element={<Login />} />
+
             {/* Logged in UserRoutes */}
             <Route>
-            <Route path="/shipping" element={<Shipping/>}/>
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/order/:id" element={<OrderDetails />} />
             </Route>
 
             {/* Admin Routes */}
             <Route
-              // element={
-              //   <ProtectedRoute
-              //     isAuthenticated={true}
-              //     adminRoute={true}
-              //     isAdmin={true}
-              //   />
-              // }
+            // element={
+            //   <ProtectedRoute
+            //     isAuthenticated={true}
+            //     adminRoute={true}
+            //     isAdmin={true}
+            //   />
+            // }
             >
               <Route path="/admin/dashboard" element={<Dashboard />} />
               <Route path="/admin/product" element={<Products />} />
@@ -77,6 +87,7 @@ function App() {
                 element={<TransactionManagement />}
               />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
         {/* Footer */}
