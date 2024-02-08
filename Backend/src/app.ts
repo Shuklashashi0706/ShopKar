@@ -6,6 +6,7 @@ app.use(express.json())
 app.get("/",(req,res)=>{
     res.send("sdg");
 })
+
 app.listen(port,()=>{
     console.log(`Listening at port ${port}`)
 })
