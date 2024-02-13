@@ -5,7 +5,6 @@ import userRoute from "./routes/user.js";
 const app = express();
 const port = 3000;
 connectDB();
-
 //middlware
 app.use(express.json());
 
