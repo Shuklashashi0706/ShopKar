@@ -7,7 +7,6 @@ const port = 3000;
 connectDB();
 //middlware
 app.use(express.json());
-
 app.use("/api/v1/user", userRoute);
 
 app.get("/", (req, res) => {
